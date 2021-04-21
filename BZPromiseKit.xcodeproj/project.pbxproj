@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F71AF448263068690085D47D /* BZResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = F71AF447263068690085D47D /* BZResolver.m */; };
+		F71AF4502630789C0085D47D /* BZPromise.m in Sources */ = {isa = PBXBuildFile; fileRef = F71AF44F2630789C0085D47D /* BZPromise.m */; };
 		F78527082626B85000B6E5C0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F78527072626B85000B6E5C0 /* AppDelegate.m */; };
 		F785270B2626B85000B6E5C0 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F785270A2626B85000B6E5C0 /* SceneDelegate.m */; };
 		F785270E2626B85000B6E5C0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F785270D2626B85000B6E5C0 /* ViewController.m */; };
@@ -37,6 +39,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F71AF446263068690085D47D /* BZResolver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BZResolver.h; sourceTree = "<group>"; };
+		F71AF447263068690085D47D /* BZResolver.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BZResolver.m; sourceTree = "<group>"; };
+		F71AF44E2630789C0085D47D /* BZPromise.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BZPromise.h; sourceTree = "<group>"; };
+		F71AF44F2630789C0085D47D /* BZPromise.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BZPromise.m; sourceTree = "<group>"; };
 		F78527032626B85000B6E5C0 /* BZPromiseKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BZPromiseKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F78527062626B85000B6E5C0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F78527072626B85000B6E5C0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -146,6 +152,10 @@
 			children = (
 				F78527452626BF6000B6E5C0 /* BZBox.h */,
 				F78527462626BF6000B6E5C0 /* BZBox.m */,
+				F71AF446263068690085D47D /* BZResolver.h */,
+				F71AF447263068690085D47D /* BZResolver.m */,
+				F71AF44E2630789C0085D47D /* BZPromise.h */,
+				F71AF44F2630789C0085D47D /* BZPromise.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -282,6 +292,8 @@
 				F785270E2626B85000B6E5C0 /* ViewController.m in Sources */,
 				F78527472626BF6000B6E5C0 /* BZBox.m in Sources */,
 				F78527082626B85000B6E5C0 /* AppDelegate.m in Sources */,
+				F71AF448263068690085D47D /* BZResolver.m in Sources */,
+				F71AF4502630789C0085D47D /* BZPromise.m in Sources */,
 				F78527192626B85100B6E5C0 /* main.m in Sources */,
 				F785270B2626B85000B6E5C0 /* SceneDelegate.m in Sources */,
 			);

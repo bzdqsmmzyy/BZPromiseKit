@@ -6,6 +6,8 @@
 //
 
 #import "ViewController.h"
+#import "BZPromise.h"
+#import "BZResolver.h"
 
 @interface ViewController ()
 
