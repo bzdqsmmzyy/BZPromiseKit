@@ -12,19 +12,17 @@ typedef NS_ENUM(NSInteger, BZBoxSealantStatus) {
     BZBoxSealantStatusResolved
 };
 
-typedef void(^_Nullable BZBoxValueHandle)(id _Nullable v);
-typedef void(^_Nonnull BZBoxSealantHandle)(BZBoxSealantStatus s);
+typedef void(^_Nonnull BZPromiseValueHandle)(id _Nullable v);
 
 NS_ASSUME_NONNULL_BEGIN
 @interface BZBox : NSObject
-
 @property (nonatomic, readonly, nullable) id value;
 
 @property (nonatomic, readonly) BZBoxSealantStatus status;
 
 @property (nonatomic, readonly) void (^seal)(id _Nullable value);
 
-@property (nonatomic, readonly) void (^append)(BZBoxValueHandle handle);
+@property (nonatomic, readonly) void (^append)(BZPromiseValueHandle);
 @end
 
 NS_ASSUME_NONNULL_END

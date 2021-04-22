@@ -9,14 +9,23 @@
 
 @implementation BZBox
 
-- (BZBoxSealantStatus)inspectStatus {
+- (BZBoxSealantStatus)status {
     NSAssert(NO, nil);
     return BZBoxSealantStatusPending;
 }
 
-- (void)inspectStatus:(BZBoxSealantHandle)handle {
-    NSAssert(NO, nil);
+- (void (^)(id _Nullable))seal {
+    return ^void (id v) {
+        NSAssert(NO, nil);
+    };
 }
+
+- (void (^)(BZPromiseValueHandle))append {
+    return ^void (BZPromiseValueHandle handle) {
+        NSAssert(NO, nil);
+    };
+}
+
 
 - (void)sealValue:(id)value {}
 @end
@@ -36,15 +45,15 @@
     return self.v;
 }
 
-- (BZBoxSealantStatus)inspectStatus {
+- (BZBoxSealantStatus)status {
     return BZBoxSealantStatusResolved;
 }
 @end
 
 @interface BZEmptyBox ()
-@property (nonatomic, assign) BZBoxSealantStatus status;
+@property (nonatomic, assign) BZBoxSealantStatus s;
 @property (nonatomic, strong) id v;
-@property (nonatomic, strong) NSMutableArray<BZBoxValueHandle> *handles;
+@property (nonatomic, strong) NSMutableArray<BZPromiseValueHandle> *handles;
 @property (nonatomic, strong) dispatch_queue_t barrier;
 @end
 @implementation BZEmptyBox
@@ -64,38 +73,39 @@
     return v;
 }
 
+- (BZBoxSealantStatus)status {
+    __block BZBoxSealantStatus s;
+    dispatch_barrier_sync(self.barrier, ^{
+        s = self.s;
+    });
+    return s;
+}
+
 - (void (^)(id _Nullable))seal {
     return ^void (id v) {
         __block NSArray *handlers = nil;
         dispatch_barrier_sync(self.barrier, ^{
-            if (self.inspectStatus == BZBoxSealantStatusResolved) {
+            if (self.s == BZBoxSealantStatusResolved) {
                 return;
             }
             handlers = [self.handles copy];
-            self.status = BZBoxSealantStatusResolved;
+            self.s = BZBoxSealantStatusResolved;
             self.v = v;
         });
         
         if (handlers) {
-            for (BZBoxValueHandle handler in handlers) {
+            for (BZPromiseValueHandle handler in handlers) {
                 handler(v);
             }
         }
     };
 }
 
-- (BZBoxSealantStatus)status {
-    __block BZBoxSealantStatus status;
-    dispatch_barrier_sync(self.barrier, ^{
-        status = self.status;
-    });
-    return status;
-}
 
-- (void (^)(BZBoxValueHandle))append {
-    return ^void (BZBoxValueHandle handle) {
+- (void (^)(BZPromiseValueHandle))append {
+    return ^void (BZPromiseValueHandle handle) {
         dispatch_barrier_sync(self.barrier, ^{
-            if (self.status == BZBoxSealantStatusPending && handle) {
+            if (self.s == BZBoxSealantStatusPending && handle) {
                 [self.handles addObject:handle];
             }
         });

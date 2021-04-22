@@ -8,6 +8,9 @@
 #import "ViewController.h"
 #import "BZPromise.h"
 #import "BZResolver.h"
+#import "BZPromise+Then.h"
+#import "BZPromise+Done.h"
+#import "BZPromise+Catch.h"
 
 @interface ViewController ()
 
@@ -17,25 +20,28 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    dispatch_queue_t queue = dispatch_queue_create("bzpromise.kit", DISPATCH_QUEUE_CONCURRENT);
     
-    for (int i = 0; i < 50; i++) {
-        dispatch_async(dispatch_get_global_queue(0, 0), ^{
-            dispatch_barrier_sync(queue, ^{
-                NSLog(@"%@", [NSString stringWithFormat:@"~~~~~~ %d--1", i]);
-            });
-            
-            dispatch_barrier_sync(queue, ^{
-                NSLog(@"%@", [NSString stringWithFormat:@"~~~~~~ %d--2", i]);
-            });
-            
-            dispatch_barrier_sync(queue, ^{
-                NSLog(@"%@", [NSString stringWithFormat:@"~~~~~~ %d--3", i]);
-            });
-        });
-    }
+    [self promise1]
+    .then(^BZPromise* (NSString *v) {
+        return [BZPromise promiseWithValue:[NSURL URLWithString:v]];
+    })
+    .done(^(NSURL *v) {
+        NSLog(@"success url %@", v);
+    })
+    .catchOf(^(NSError *e) {
+        NSLog(@"error e %@", e);
+    });
 }
+
+- (BZPromise *)promise1 {
+    return [BZPromise promiseWithResolver:^(BZResolver * _Nonnull resolver) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            resolver.fulfill(@"https://www.baidu.com");
+            resolver.reject([NSError errorWithDomain:@"test.com" code:123 userInfo:nil]);
+        });
+    }];
+}
+
 
 
 @end

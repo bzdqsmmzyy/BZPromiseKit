@@ -5,6 +5,8 @@
 //  Created by xiaheqi on 2021/4/21.
 //
 
+#import "BZBox.h"
+#import "BZResult.h"
 #import "BZPromise.h"
 #import "BZResolver.h"
 
@@ -12,26 +14,34 @@
 @property (nonatomic, strong) BZBox *box;
 @end
 @implementation BZPromise
++ (instancetype)promise {
+    BZEmptyBox *box = [[BZEmptyBox alloc] init];
+    return [[self alloc] initWithBox:box];
+}
 + (instancetype)promiseWithValue:(id)value {
-    BZPromise *p = [[BZPromise alloc] init];
     BZResult *r = [[BZResult alloc] initWithValue:value];
-    p.box = [[BZSealedBox alloc] initWithValue:r];
-    return p;
+    BZSealedBox *box = [[BZSealedBox alloc] initWithValue:r];
+    return [[self alloc] initWithBox:box];
 }
 
 + (instancetype)promiseWithError:(NSError *)error {
-    BZPromise *p = [[BZPromise alloc] init];
     BZResult *r = [[BZResult alloc] initWithError:error];
-    p.box = [[BZSealedBox alloc] initWithValue:r];
-    return p;
+    BZSealedBox *box = [[BZSealedBox alloc] initWithValue:r];
+    return [[self alloc] initWithBox:box];
 }
 
 + (instancetype)promiseWithResolver:(void (^)(BZResolver * _Nonnull))body {
-    BZPromise *p = [[BZPromise alloc] init];
-    p.box = [[BZEmptyBox alloc] init];
-    BZResolver *resolver = [[BZResolver alloc] initWithBox:p.box];
+    BZEmptyBox *box = [[BZEmptyBox alloc] init];
+    BZResolver *resolver = [[BZResolver alloc] initWithBox:box];
     !body ?: body(resolver);
-    return p;
+    return [[self alloc] initWithBox:box];
+}
+
+- (instancetype)initWithBox:(BZBox *)box {
+    if (self = [super init]) {
+        _box = box;
+    }
+    return self;
 }
 
 - (BZResult *)result {
@@ -46,8 +56,19 @@
     return nil;
 }
 
-- (void (^)(BZBoxValueHandle))pipe {
-    return ^void (BZBoxValueHandle to){
+- (void (^)(BZResult * _Nullable))seal {
+    return ^void (BZResult *v) {
+        if ([self.box isKindOfClass:[BZEmptyBox class]]) {
+            BZEmptyBox *box = (BZEmptyBox *)self.box;
+            box.seal(v);
+        }
+        else {
+            NSAssert(NO, @"A BZSealedBox can't seal");
+        }
+    };
+}
+- (void (^)(BZPromisePipeBlock))pipe {
+    return ^void (BZPromisePipeBlock to){
         switch (self.box.status) {
             case BZBoxSealantStatusPending:
                 self.box.append(to);

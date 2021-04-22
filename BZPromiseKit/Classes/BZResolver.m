@@ -7,6 +7,7 @@
 
 #import "BZResolver.h"
 #import "BZBox.h"
+#import "BZResult.h"
 
 @interface BZResolver ()
 @property (nonatomic, strong) BZBox *box;
@@ -42,23 +43,4 @@
         self.box.seal(r);
     };
 }
-@end
-
-
-@implementation BZResult
-- (instancetype)initWithValue:(id)value {
-    if (self = [super init]) {
-        _type = BZResultTypeFulfilled;
-        _value = value;
-    }
-    return self;
-}
-- (instancetype)initWithError:(NSError *)error {
-    if (self = [super init]) {
-        _type = BZResultTypeRejected;
-        _error = error;
-    }
-    return self;
-}
-
 @end
