@@ -20,6 +20,7 @@
 		F785272E2626B85100B6E5C0 /* BZPromiseKitUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F785272D2626B85100B6E5C0 /* BZPromiseKitUITests.m */; };
 		F78527472626BF6000B6E5C0 /* BZBox.m in Sources */ = {isa = PBXBuildFile; fileRef = F78527462626BF6000B6E5C0 /* BZBox.m */; };
 		F78AB88C2633120300325163 /* BZPromise+Map.m in Sources */ = {isa = PBXBuildFile; fileRef = F78AB88B2633120300325163 /* BZPromise+Map.m */; };
+		F78AB8922633195300325163 /* BZPromise+Firstly.m in Sources */ = {isa = PBXBuildFile; fileRef = F78AB8912633195300325163 /* BZPromise+Firstly.m */; };
 		F7A748A62631C100007B7F72 /* BZPromise+Then.m in Sources */ = {isa = PBXBuildFile; fileRef = F7A748A52631C100007B7F72 /* BZPromise+Then.m */; };
 		F7A748B22631CEF6007B7F72 /* BZPromise+Done.m in Sources */ = {isa = PBXBuildFile; fileRef = F7A748B12631CEF6007B7F72 /* BZPromise+Done.m */; };
 		F7A748B82631D1CB007B7F72 /* BZPromise+Catch.m in Sources */ = {isa = PBXBuildFile; fileRef = F7A748B72631D1CB007B7F72 /* BZPromise+Catch.m */; };
@@ -70,6 +71,8 @@
 		F78527462626BF6000B6E5C0 /* BZBox.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BZBox.m; sourceTree = "<group>"; };
 		F78AB88A2633120300325163 /* BZPromise+Map.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BZPromise+Map.h"; sourceTree = "<group>"; };
 		F78AB88B2633120300325163 /* BZPromise+Map.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "BZPromise+Map.m"; sourceTree = "<group>"; };
+		F78AB8902633195300325163 /* BZPromise+Firstly.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BZPromise+Firstly.h"; sourceTree = "<group>"; };
+		F78AB8912633195300325163 /* BZPromise+Firstly.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "BZPromise+Firstly.m"; sourceTree = "<group>"; };
 		F7A748A42631C100007B7F72 /* BZPromise+Then.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BZPromise+Then.h"; sourceTree = "<group>"; };
 		F7A748A52631C100007B7F72 /* BZPromise+Then.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "BZPromise+Then.m"; sourceTree = "<group>"; };
 		F7A748B02631CEF6007B7F72 /* BZPromise+Done.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BZPromise+Done.h"; sourceTree = "<group>"; };
@@ -181,6 +184,8 @@
 				F7A748B12631CEF6007B7F72 /* BZPromise+Done.m */,
 				F7A748B62631D1CB007B7F72 /* BZPromise+Catch.h */,
 				F7A748B72631D1CB007B7F72 /* BZPromise+Catch.m */,
+				F78AB8902633195300325163 /* BZPromise+Firstly.h */,
+				F78AB8912633195300325163 /* BZPromise+Firstly.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -325,6 +330,7 @@
 				F71AF4502630789C0085D47D /* BZPromise.m in Sources */,
 				F78527192626B85100B6E5C0 /* main.m in Sources */,
 				F78AB88C2633120300325163 /* BZPromise+Map.m in Sources */,
+				F78AB8922633195300325163 /* BZPromise+Firstly.m in Sources */,
 				F785270B2626B85000B6E5C0 /* SceneDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

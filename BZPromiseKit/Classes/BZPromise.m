@@ -81,4 +81,8 @@
         }
     };
 }
+
+- (void)dealloc {
+    NSLog(@"~~~ promise dealloc");
+}
 @end
