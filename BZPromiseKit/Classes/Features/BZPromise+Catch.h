@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, readonly) void (^catchOf)(BZPromiseCatchBlock);
 
+@property (nonatomic, readonly) void (^catchAt)(dispatch_queue_t _Nullable, BZPromiseCatchBlock);
+
 @end
 
 NS_ASSUME_NONNULL_END

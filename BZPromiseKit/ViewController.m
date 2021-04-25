@@ -12,7 +12,7 @@
 #import "BZPromise+Done.h"
 #import "BZPromise+Map.h"
 #import "BZPromise+Catch.h"
-#import "BZPromise+Firstly.h"
+#import "BZPromise+Convenience.h"
 
 @interface ViewController ()
 
@@ -33,7 +33,7 @@
         [button.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor]
     ]];
     
-    firstly(^BZPromise *{
+    BZPFirstly(^BZPromise *{
         return [self promise1];
     })
     .then(^BZPromise * _Nonnull(id  _Nullable v) {
@@ -47,6 +47,15 @@
     })
     .catchOf(^(NSError *e) {
         NSLog(@"error e %@", e);
+    });
+    
+    NSArray *array = @[[self promise1], [self promise2:@"https://www.youdao.com"]];
+    BZPRace(array).done(^(id  _Nullable v) {
+        NSLog(@"^^^^BZPMerge %@",v);
+    });
+    
+    BZPWhen(array).done(^(id  _Nullable v) {
+        NSLog(@"^^^^BZPWhen %@", v);
     });
 }
 
