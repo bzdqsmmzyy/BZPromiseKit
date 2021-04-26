@@ -2,7 +2,7 @@
 //  BZPromise+Convenience.h
 //  BZPromiseKit
 //
-//  Created by xiaheqi on 2021/4/23.
+//  Created by bzdqsmmz on 2021/4/23.
 //
 
 #import "BZPromise.h"
@@ -15,4 +15,6 @@ BZPromise *BZPFirstly(BZPromiseFirstlyBlock);
 BZPromise *BZPRace(NSArray <BZPromise *> *promises);
 
 BZPromise *BZPWhen(NSArray <BZPromise *> *promises);
+
+BZPromise *BZAfter(NSTimeInterval seconds);
 NS_ASSUME_NONNULL_END

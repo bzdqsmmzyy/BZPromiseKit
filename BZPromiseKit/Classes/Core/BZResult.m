@@ -2,7 +2,7 @@
 //  BZResult.m
 //  BZPromiseKit
 //
-//  Created by xiaheqi on 2021/4/22.
+//  Created by bzdqsmmz on 2021/4/22.
 //
 
 #import "BZResult.h"

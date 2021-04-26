@@ -2,7 +2,7 @@
 //  BZPromise.h
 //  BZPromiseKit
 //
-//  Created by xiaheqi on 2021/4/21.
+//  Created by bzdqsmmz on 2021/4/21.
 //
 
 #import <Foundation/Foundation.h>
@@ -28,5 +28,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, readonly) void (^seal)(BZResult* _Nullable r);
 @end
+
+
+typedef NS_ENUM(NSInteger, BZPErrorCode) {
+    BZPErrorCodeReturnedSelf = 10000,
+    BZPErrorCodeBadInput
+};
+
+FOUNDATION_EXPORT void BZPNullableQueueAsync(dispatch_queue_t _Nullable queue,
+                                             dispatch_block_t block);
+
+
+FOUNDATION_EXPORT NSErrorDomain const BZPErrorDomian;
 
 NS_ASSUME_NONNULL_END

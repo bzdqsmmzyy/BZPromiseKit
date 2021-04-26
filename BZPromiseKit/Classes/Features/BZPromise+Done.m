@@ -2,12 +2,11 @@
 //  BZPromise+Done.m
 //  BZPromiseKit
 //
-//  Created by xiaheqi on 2021/4/22.
+//  Created by bzdqsmmz on 2021/4/22.
 //
 
 #import "BZPromise+Done.h"
 #import "BZResult.h"
-#import "BZHelper.h"
 
 @implementation BZPromise (Done)
 - (BZPromise * _Nonnull (^)(BZPromiseDoneBlock))done {
@@ -22,7 +21,7 @@
         self.pipe(^(BZResult * _Nullable r) {
             switch (r.type) {
                 case BZResultTypeFulfilled: {
-                    bz_nullable_queue_async(q, ^{
+                    BZPNullableQueueAsync(q, ^{
                         body(r.value);
                         rp.seal(r);
                     });

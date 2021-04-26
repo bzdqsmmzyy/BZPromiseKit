@@ -2,7 +2,7 @@
 //  ViewController.m
 //  BZPromiseKit
 //
-//  Created by 夏和奇 on 2021/4/14.
+//  Created by bzdqsmmz on 2021/4/14.
 //
 
 #import "ViewController.h"
@@ -51,7 +51,7 @@
     
     NSArray *array = @[[self promise1], [self promise2:@"https://www.youdao.com"]];
     BZPRace(array).done(^(id  _Nullable v) {
-        NSLog(@"^^^^BZPMerge %@",v);
+        NSLog(@"^^^^BZPRace %@",v);
     });
     
     BZPWhen(array).done(^(id  _Nullable v) {

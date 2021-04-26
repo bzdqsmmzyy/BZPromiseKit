@@ -2,12 +2,11 @@
 //  BZPromise+Map.m
 //  BZPromiseKit
 //
-//  Created by xiaheqi on 2021/4/23.
+//  Created by bzdqsmmz on 2021/4/23.
 //
 
 #import "BZPromise+Map.h"
 #import "BZResult.h"
-#import "BZHelper.h"
 
 @implementation BZPromise (Map)
 
@@ -23,7 +22,7 @@
         self.pipe(^(BZResult * _Nullable r) {
             switch (r.type) {
                 case BZResultTypeFulfilled: {
-                    bz_nullable_queue_async(q, ^{
+                    BZPNullableQueueAsync(q, ^{
                         BZResult *v = [[BZResult alloc] initWithValue:transform(r.value)];
                         rp.seal(v);
                     });

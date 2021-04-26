@@ -2,7 +2,7 @@
 //  BZPromise+Map.h
 //  BZPromiseKit
 //
-//  Created by xiaheqi on 2021/4/23.
+//  Created by bzdqsmmz on 2021/4/23.
 //
 
 #import "BZPromise.h"

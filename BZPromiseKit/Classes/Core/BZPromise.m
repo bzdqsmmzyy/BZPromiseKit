@@ -2,7 +2,7 @@
 //  BZPromise.m
 //  BZPromiseKit
 //
-//  Created by xiaheqi on 2021/4/21.
+//  Created by bzdqsmmz on 2021/4/21.
 //
 
 #import "BZBox.h"
@@ -81,8 +81,15 @@
         }
     };
 }
-
-- (void)dealloc {
-    NSLog(@"~~~ promise dealloc");
-}
 @end
+
+void BZPNullableQueueAsync(dispatch_queue_t queue, dispatch_block_t block) {
+    if (queue) {
+        dispatch_async(queue, block);
+    }
+    else {
+        !block ?: block();
+    }
+}
+
+NSErrorDomain const BZPErrorDomian = @"com.bzpromisekit.domain";

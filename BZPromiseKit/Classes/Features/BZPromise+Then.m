@@ -2,11 +2,10 @@
 //  BZPromise+Then.m
 //  BZPromiseKit
 //
-//  Created by xiaheqi on 2021/4/22.
+//  Created by bzdqsmmz on 2021/4/22.
 //
 
 #import "BZPromise+Then.h"
-#import "BZHelper.h"
 #import "BZResult.h"
 
 @implementation BZPromise (Then)
@@ -21,12 +20,13 @@
         self.pipe(^(BZResult * _Nullable r) {
             switch (r.type) {
                 case BZResultTypeFulfilled: {
-                    bz_nullable_queue_async(q, ^{
+                    BZPNullableQueueAsync(q, ^{
                         BZPromise *rv = body(r.value);
                         if (rv == rp) {
-                            NSError *error = [NSError errorWithDomain:@"com.bzpromisekit.Domain"
-                                                                 code:10001
-                                                             userInfo:@{NSLocalizedDescriptionKey : @"A handler returned its own promis"}];
+                            NSDictionary *userInfo = @{NSLocalizedDescriptionKey : @"A handler returned its own promis"};
+                            NSError *error = [NSError errorWithDomain:BZPErrorDomian
+                                                                 code:BZPErrorCodeReturnedSelf
+                                                             userInfo:userInfo];
                             BZResult *r = [[BZResult alloc] initWithError:error];
                             rp.seal(r);
                             return;

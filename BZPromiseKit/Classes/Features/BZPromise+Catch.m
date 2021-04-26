@@ -2,12 +2,11 @@
 //  BZPromise+Catch.m
 //  BZPromiseKit
 //
-//  Created by xiaheqi on 2021/4/22.
+//  Created by bzdqsmmz on 2021/4/22.
 //
 
 #import "BZPromise+Catch.h"
 #import "BZResult.h"
-#import "BZHelper.h"
 
 @implementation BZPromise (Catch)
 - (void (^)(BZPromiseCatchBlock))catchOf {
@@ -20,7 +19,7 @@
     return ^void (dispatch_queue_t q, BZPromiseCatchBlock body) {
         self.pipe(^(BZResult * _Nullable v) {
             if (v.type == BZResultTypeRejected) {
-                bz_nullable_queue_async(q, ^{
+                BZPNullableQueueAsync(q, ^{
                     body(v.error);
                 });
             }

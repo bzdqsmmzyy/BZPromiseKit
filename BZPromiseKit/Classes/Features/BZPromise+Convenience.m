@@ -2,7 +2,7 @@
 //  BZPromise+Firstly.m
 //  BZPromiseKit
 //
-//  Created by xiaheqi on 2021/4/23.
+//  Created by bzdqsmmz on 2021/4/23.
 //
 
 #import "BZPromise+Convenience.h"
@@ -21,9 +21,10 @@ BZPromise *BZPFirstly(BZPromiseFirstlyBlock body) {
 
 BZPromise *BZPRace(NSArray <BZPromise *> *promises) {
     if (!promises.count) {
-        NSError *error = [NSError errorWithDomain:@"com.bzpromisekit.Domain"
-                                             code:10001
-                                         userInfo:@{NSLocalizedDescriptionKey : @"bad input"}];
+        NSDictionary *userInfo = @{NSLocalizedDescriptionKey : @"bad input"};
+        NSError *error = [NSError errorWithDomain:BZPErrorDomian
+                                             code:BZPErrorCodeBadInput
+                                         userInfo:userInfo];
         return [BZPromise promiseWithError:error];
     }
     BZPromise *rp = [BZPromise promise];
@@ -69,4 +70,14 @@ BZPromise *BZPWhen(NSArray <BZPromise *> *promises) {
             });
         }
     }];
+}
+
+BZPromise *BZAfter(NSTimeInterval seconds) {
+    dispatch_time_t when = dispatch_time(DISPATCH_TIME_NOW, (int64_t)seconds * NSEC_PER_SEC);
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    BZPromise *rp = [BZPromise promise];
+    dispatch_after(when, queue, ^{
+        rp.seal(nil);
+    });
+    return rp;
 }
